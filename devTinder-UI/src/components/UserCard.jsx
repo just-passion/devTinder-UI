@@ -7,14 +7,12 @@ import { useLocation } from "react-router-dom";
 
 const UserCard = ({ user }) => {
   const { _id, firstName, lastName, photoUrl, age, gender, about } = user; //info of the user on feed
-  console.log({ user: user });
   const dispatch = useDispatch();
   const location = useLocation();
   const isProfilePage = location.pathname.includes("/profile");
   //!location.pathname.includes("/login")
   const handleSendRequest = async (status, userId) => {
     try {
-      console.log({ info: userId });
       const res = await axios.post(
         BASE_URL + "/request/send/" + status + "/" + userId,
         {},
