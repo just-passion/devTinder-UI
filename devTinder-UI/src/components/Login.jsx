@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [emailId, setEmailid] = useState("user1@gmail.com");
-  const [password, setPassword] = useState("User1@123");
+  const [emailId, setEmailid] = useState("user2@gmail.com");
+  const [password, setPassword] = useState("User2@1234");
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const Login = () => {
                 value={emailId}
                 placeholder="Email ID"
                 className="input input-bordered w-full max-w-xs"
-                onChange={() => setEmailid(e.target.value)}
+                onChange={(e) => setEmailid(e?.target?.value)}
               />
             </label>
             <label className="form-control w-full max-w-xs my-2">
@@ -58,7 +58,7 @@ const Login = () => {
                 value={password}
                 placeholder="Password"
                 className="input input-bordered w-full max-w-xs"
-                onChange={() => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
           </div>
