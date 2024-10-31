@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { BASE_URL } from "../utils/constants";
@@ -11,18 +11,23 @@ const Body = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((store) => store.user);
+  const location = useLocation();
 
   const fetchUser = async () => {
     try {
       if (userData) {
         return;
       }
-      const res = await axios.get(BASE_URL + "/profile/view", {
-        withCredentials: true,
-      });
-      dispatch(addUser(res.data));
+      if (!location.pathname.includes("/login")) {
+        const res = await axios.get(BASE_URL + "/profile/view", {
+          withCredentials: true,
+        });
+        dispatch(addUser(res.data));
+      }
     } catch (error) {
-      navigate("/login");
+      if (error.status === 401) {
+        navigate("/login");
+      }
       console.error(error);
     }
   };
